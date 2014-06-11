@@ -85,14 +85,27 @@ def main():
         print("Unable to open the adapter (%s)." % dev)
         sys.exit(2)
 
+    bpf_p = POINTER(bpf_program)()
+    #if pcap_compile(fp, bpf_p, c_char_p("arp"), c_int(1), u_int(0xffffff)) < 0:
+    #    print("Unable to compile filter:  %s" % pcap_geterr(fp))
+    #    sys.exit(2)
+
+    #if pcap_setfilter(fp, bpf_p) < 0:
+    #    print("Unable to set filter:  %s" % pcap_geterr(fp))
+    #    sys.exit(2)
+
     pkt_header = POINTER(pcap_pkthdr)()
     pkt_data = POINTER(c_ubyte)()
     while pcap_next_ex(fp, byref(pkt_header), byref(pkt_data)) > 0:
         timestr = time.strftime("%H:%M:%S", time.localtime(pkt_header.contents.ts.tv_sec))
         print("%s %.6d len:%d") % (timestr, pkt_header.contents.ts.tv_usec, pkt_header.contents.len)
-        for i in xrange(0, 12):
-            print hex(pkt_data[i]),
-        print ""
+
+        print hex(pkt_data[12]), hex(pkt_data[13])
+        #print(pkt_data[0: pkt_header.contents.len])
+        #i = 0
+        #for i in xrange(0, 6):
+        #    print str(hex(int(pkt_data[i]))),
+        #print ""
 
     pcap_close(fp)
 
