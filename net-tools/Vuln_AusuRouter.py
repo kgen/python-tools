@@ -1,5 +1,4 @@
-# ausuRoute.py
-# coding:utf-8
+# coding: utf-8
 import httplib
 import ssl
 import urllib2
@@ -8,7 +7,6 @@ import socket
 
 activeUrls = []
 ips = []
-
 
 # custom HTTPS opener, banner's oracle 10g server supports SSLv3 only
 class HTTPSConnectionV3(httplib.HTTPSConnection):
@@ -33,9 +31,7 @@ class HTTPSHandlerV3(urllib2.HTTPSHandler):
 # install opener
 urllib2.install_opener(urllib2.build_opener(HTTPSHandlerV3()))
 
-
 def openiptest(ip):
-
     url = 'https://' + ip + '/smb/tmp/$dir/lighttpd/permissions'
     try:
         c = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -63,7 +59,6 @@ def openiptest(ip):
         print 'SSLError', e.message
     except Exception, e:
         print 'error', e.message
-
 
 def assignip():
     for i in range(1, 2):

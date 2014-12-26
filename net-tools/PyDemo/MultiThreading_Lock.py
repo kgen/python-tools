@@ -1,10 +1,10 @@
 from threading import Thread, Lock
 import time
 import random
- 
+
 queue = []
 lock = Lock()
- 
+
 class ProducerThread(Thread):
     def run(self):
         nums = range(5) #Will create the list [0, 1, 2, 3, 4]

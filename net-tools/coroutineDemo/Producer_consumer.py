@@ -5,7 +5,7 @@ from greenlet import greenlet
 global q
 q = ''
 
-def produce(con):
+def producer(con):
     global q
     if len(q) < 7:
         q += str(len(q))
@@ -25,6 +25,6 @@ def consumer():
     pro.switch(self)
 
 if __name__ == '__main__':
-    pro = greenlet(produce)
+    pro = greenlet(producer)
     con = greenlet(consumer)
     pro.switch(con)

