@@ -1,8 +1,8 @@
 # coding:utf-8
 import random
 import time
+import gevent
 from gevent import select
-import gevent.monkey
 
 start = time.time()
 tic = lambda: 'at %1.1f seconds' % (time.time() - start)
